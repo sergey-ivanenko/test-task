@@ -31,11 +31,11 @@ public class Timesheet implements Serializable {
     @Column(name = "paid_out", nullable = false, columnDefinition = "boolean default false")
     private Boolean isPaidOut;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "timesheet")
+    @OneToMany(mappedBy = "timesheet", cascade = CascadeType.ALL)
     private Set<TimesheetStatus> timesheetStatuses;
 
     public Timesheet() {

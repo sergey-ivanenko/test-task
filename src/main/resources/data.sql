@@ -1,12 +1,12 @@
 -- Table: user
--- DROP TABLE IF EXISTS user;
-/*CREATE TABLE user (
+/*CREATE TABLE IF NOT EXISTS users (
     id BIGINT NOT NULL AUTO_INCREMENT  PRIMARY KEY,
     full_name varchar(50) NOT NULL,
     login varchar(50) NOT NULL,
-    password varchar(255) NOT NULL
+    password varchar(255) NOT NULL,
+    UNIQUE (login)
 );*/
-INSERT INTO user (full_name, login, password) VALUES
+INSERT INTO users (full_name, login, password) VALUES
     ('Main Admin', 'admin', 'admin'),
     ('Main Cook', 'chef', 'chef'),
     ('Cook Cook', 'cook', 'cook'),
@@ -53,12 +53,12 @@ INSERT INTO user_role (user_id, role_id) VALUES
     UNIQUE (user_id)
 );*/
 INSERT INTO salary (user_id, rate, unit, date_start, date_end) VALUES
-    (1, 11.3, 'BYN / h', '20160526', '99991231'),
-    (2, 7.9, 'BYN / h', '20160902', '99991231'),
-    (3, 7.1, 'BYN / h', '20160415', '99991231'),
-    (4, 5.0, 'BYN / h', '20170210', '99991231'),
-    (5, 5.0, 'BYN / h', '20180808', '99991231'),
-    (6, 4.2, 'BYN / h', '20191119', '99991231');
+    (1, 11.3, 'BYN_PER_HOUR', '20160526', '99991231'),
+    (2, 7.9, 'BYN_PER_HOUR', '20160902', '99991231'),
+    (3, 7.1, 'BYN_PER_HOUR', '20160415', '99991231'),
+    (4, 5.0, 'BYN_PER_HOUR', '20170210', '99991231'),
+    (5, 5.0, 'BYN_PER_HOUR', '20180808', '99991231'),
+    (6, 4.2, 'BYN_PER_HOUR', '20191119', '99991231');
 
 -- Table: cafe
 /*CREATE TABLE cafe (
@@ -67,7 +67,7 @@ INSERT INTO salary (user_id, rate, unit, date_start, date_end) VALUES
     UNIQUE (name)
 );*/
 INSERT INTO cafe (name) VALUES
-    ('Dаminika Polotsk'),
+    ('Daminika Polotsk'),
     ('Daminika Novopolotsk');
 
 -- Table for mapping cafe and user: cafe_user
@@ -104,54 +104,54 @@ INSERT INTO timesheet (user_id, day_type, date, work_time, daily_earnings, paid_
     (1, 'WORKDAY', '20200219', 8, 90.4, true),
     (1, 'WORKDAY', '20200220', 6, 67.8, true),
     (1, 'WORKDAY', '20200221', 8, 90.4, true),
-    (1, 'DAY OFF', '20200222', 0, 0.0, true),
-    (1, 'DAY OFF', '20200223', 0, 0.0, true),
+    (1, 'DAY_OFF', '20200222', 0, 0.0, true),
+    (1, 'DAY_OFF', '20200223', 0, 0.0, true),
     (1, 'WORKDAY', '20200224', 8, 90.4, false),
     (1, 'WORKDAY', '20200225', 8, 90.4, false),
     (2, 'WORKDAY', '20200217', 8, 63.2, true),
     (2, 'WORKDAY', '20200218', 12, 94.8, true),
-    (2, 'DAY OFF', '20200219', 0, 0.0, true),
-    (2, 'DAY OFF', '20200220', 0, 0.0, true),
+    (2, 'DAY_OFF', '20200219', 0, 0.0, true),
+    (2, 'DAY_OFF', '20200220', 0, 0.0, true),
     (2, 'WORKDAY', '20200221', 12, 94.8, true),
     (2, 'WORKDAY', '20200222', 12, 94.8, true),
-    (2, 'DAY OFF', '20200223', 0, 0.0, true),
-    (2, 'DAY OFF', '20200224', 0, 0.0, false),
+    (2, 'DAY_OFF', '20200223', 0, 0.0, true),
+    (2, 'DAY_OFF', '20200224', 0, 0.0, false),
     (2, 'WORKDAY', '20200225', 11, 86.9, false),
-    (3, 'DAY OFF', '20200217', 0, 0.0, true),
-    (3, 'DAY OFF', '20200218', 0, 0.0, true),
+    (3, 'DAY_OFF', '20200217', 0, 0.0, true),
+    (3, 'DAY_OFF', '20200218', 0, 0.0, true),
     (3, 'WORKDAY', '20200219', 12, 85.2, true),
     (3, 'WORKDAY', '20200220', 12, 85.2, true),
-    (3, 'DAY OFF', '20200221', 0, 0.0, true),
-    (3, 'DAY OFF', '20200222', 0, 0.0, true),
+    (3, 'DAY_OFF', '20200221', 0, 0.0, true),
+    (3, 'DAY_OFF', '20200222', 0, 0.0, true),
     (3, 'WORKDAY', '20200223', 12, 85.2, true),
     (3, 'WORKDAY', '20200224', 12, 85.2, false),
-    (3, 'DAY OFF', '20200225', 0, 0.0, false),
+    (3, 'DAY_OFF', '20200225', 0, 0.0, false),
     (4, 'WORKDAY', '20200217', 8, 40.0, true),
     (4, 'WORKDAY', '20200218', 8, 40.0, true),
-    (4, 'DAY OFF', '20200219', 0, 0.0, true),
+    (4, 'DAY_OFF', '20200219', 0, 0.0, true),
     (4, 'WORKDAY', '20200220', 8, 40.0, true),
     (4, 'WORKDAY', '20200221', 8, 40.0, true),
-    (4, 'DAY OFF', '20200222', 0, 0.0, true),
+    (4, 'DAY_OFF', '20200222', 0, 0.0, true),
     (4, 'WORKDAY', '20200223', 7, 35.0, true),
     (4, 'WORKDAY', '20200224', 8, 40.0, false),
-    (4, 'DAY OFF', '20200225', 0, 0.0, false),
-    (5, 'DAY OFF', '20200217', 0, 0.0, true),
+    (4, 'DAY_OFF', '20200225', 0, 0.0, false),
+    (5, 'DAY_OFF', '20200217', 0, 0.0, true),
     (5, 'WORKDAY', '20200218', 8, 40.0, true),
     (5, 'WORKDAY', '20200219', 8, 40.0, true),
-    (5, 'DAY OFF', '20200220', 0, 0.0, true),
+    (5, 'DAY_OFF', '20200220', 0, 0.0, true),
     (5, 'WORKDAY', '20200221', 8, 40.0, true),
     (5, 'WORKDAY', '20200222', 8, 40.0, true),
-    (5, 'DAY OFF', '20200223', 0, 0.0, true),
+    (5, 'DAY_OFF', '20200223', 0, 0.0, true),
     (5, 'WORKDAY', '20200224', 8, 40.0, false),
     (5, 'WORKDAY', '20200225', 8, 40.0, false),
     (6, 'WORKDAY', '20200217', 8, 33.6, true),
-    (6, 'DAY OFF', '20200218', 0, 0.0, true),
+    (6, 'DAY_OFF', '20200218', 0, 0.0, true),
     (6, 'WORKDAY', '20200219', 8, 33.6, true),
     (6, 'WORKDAY', '20200220', 8, 33.6, true),
-    (6, 'DAY OFF', '20200221', 0, 0.0, true),
+    (6, 'DAY_OFF', '20200221', 0, 0.0, true),
     (6, 'WORKDAY', '20200222', 8, 33.6, true),
     (6, 'WORKDAY', '20200223', 8, 33.6, true),
-    (6, 'DAY OFF', '20200224', 0, 0.0, false),
+    (6, 'DAY_OFF', '20200224', 0, 0.0, false),
     (6, 'WORKDAY', '20200225', 8, 33.6, false);
 
 -- Table: timesheet_status
@@ -230,31 +230,31 @@ INSERT INTO timesheet_status (timesheet_id, user_id, status_value, date) VALUES
     UNIQUE (name)
 );*/
 INSERT INTO product (name, unit) VALUES
-    ('Potatoes', 'kg'),
-    ('Tomatoes', 'kg'),
-    ('Cucumbers', 'kg'),
-    ('Cabbage', 'kg'),
-    ('Bell pepper', 'kg'),
-    ('Black olives', 'g'),
-    ('Lemons', 'g'),
-    ('Cheese', 'g'),
-    ('Butter', 'g'),
-    ('Champignons', 'g'),
-    ('Pork', 'kg'),
-    ('Ham', 'kg'),
-    ('Flour', 'kg'),
-    ('Yeast dough', 'kg'),
-    ('Pepper', 'g'),
-    ('Mozzarella', 'kg'),
-    ('Onion', 'kg'),
-    ('Basil leaves', 'g'),
-    ('Oil', 'ml'),
-    ('Apple vinegar', 'ml'),
-    ('Dill', 'g'),
-    ('Green onion', 'g'),
-    ('Parsley', 'g'),
-    ('Feta', 'g'),
-    ('Chicken fillet', 'kg');
+    ('Potatoes', 'KG'),
+    ('Tomatoes', 'KG'),
+    ('Cucumbers', 'KG'),
+    ('Cabbage', 'KG'),
+    ('Bell pepper', 'KG'),
+    ('Black olives', 'G'),
+    ('Lemons', 'G'),
+    ('Cheese', 'G'),
+    ('Butter', 'G'),
+    ('Champignons', 'G'),
+    ('Pork', 'KG'),
+    ('Ham', 'KG'),
+    ('Flour', 'KG'),
+    ('Yeast dough', 'KG'),
+    ('Pepper', 'G'),
+    ('Mozzarella', 'KG'),
+    ('Onion', 'KG'),
+    ('Basil leaves', 'G'),
+    ('Oil', 'ML'),
+    ('Apple vinegar', 'ML'),
+    ('Dill', 'G'),
+    ('Green onion', 'G'),
+    ('Parsley', 'G'),
+    ('Feta', 'G'),
+    ('Chicken fillet', 'KG');
 
 -- Table: storage(cafe_product)
 /*CREATE TABLE storage (

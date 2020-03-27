@@ -2,7 +2,7 @@ package by.itechart.testtask.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +26,7 @@ public class Salary implements Serializable {
     @Column(name = "date_end", nullable = false)
     private Date dateEnd;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
