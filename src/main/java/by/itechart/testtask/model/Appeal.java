@@ -28,7 +28,7 @@ public class Appeal implements Serializable {
     @JoinColumn(name = "ordering_id")
     private Ordering ordering;
 
-    @OneToMany(mappedBy = "appeal")
+    @OneToMany(mappedBy = "appeal", cascade = CascadeType.ALL)
     private Set<AppealComment> appealComments;
 
     public Appeal() {

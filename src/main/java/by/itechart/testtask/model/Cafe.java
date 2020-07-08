@@ -29,7 +29,7 @@ public class Cafe implements Serializable {
     @OneToMany(mappedBy = "cafe")
     private List<BalanceChange> balanceChanges;
 
-    @OneToMany(mappedBy = "cafe")
+    @OneToMany(mappedBy = "cafe"/*, cascade = CascadeType.ALL*/)
     private List<Appeal> appeals;
 
     public Cafe() {

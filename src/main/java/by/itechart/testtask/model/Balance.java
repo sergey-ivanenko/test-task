@@ -26,7 +26,7 @@ public class Balance implements Serializable {
     @Column(name = "solvency", nullable = false, columnDefinition = "boolean default true")
     private Boolean solvency;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne/*(cascade = CascadeType.MERGE)*/
     @JoinColumn(name = "cafe_id", nullable = false)
     private Cafe cafe;
 

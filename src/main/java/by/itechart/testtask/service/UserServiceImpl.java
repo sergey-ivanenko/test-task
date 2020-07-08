@@ -10,12 +10,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -35,12 +38,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findUserById(Long id) {
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public UserDto findById(Long id) {
         return userMapper.toDto(userRepository.findById(id).orElseThrow(() -> new CustomException(
                 String.format(ErrorType.ENTITY_NOT_FOUND_BY_ID.getDescription(), id))));
     }
 
     @Override
+    public UserDto findByLogin(String login) {
+        return userMapper.toDto(userRepository.findByLogin(login).orElseThrow(() -> new CustomException(
+                String.format(ErrorType.ENTITY_NOT_FOUND_BY_ID.getDescription(), login))));
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<UserDto> findAll() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
@@ -49,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(UserDto userDto) {
-        logger.info(String.format("User %s updated.", userDto.getLogin()));
+        logger.info(String.format("User %s updated.", userDto.getId()));
         return userMapper.toDto(userRepository.save(userMapper.toEntity(userDto)));
     }
 

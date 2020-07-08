@@ -9,7 +9,7 @@ public enum DayType {
     private String dayTypeName;
 
     DayType(String dayTypeName) {
-            this.dayTypeName = dayTypeName;
+        this.dayTypeName = dayTypeName;
     }
 
     public String getDayTypeName() {

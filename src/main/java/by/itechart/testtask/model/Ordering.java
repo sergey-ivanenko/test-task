@@ -25,7 +25,7 @@ public class Ordering implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}/*cascade = CascadeType.ALL*/)
     @JoinTable(name = "ordering_menu_item", joinColumns = @JoinColumn(name = "ordering_id"),
             inverseJoinColumns = @JoinColumn(name = "menu_item_id"))
     private List<MenuItem> menuItems;

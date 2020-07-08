@@ -25,7 +25,7 @@ public class BalanceChange implements Serializable {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name="cafe_id", nullable=false)
+    @JoinColumn(name = "cafe_id", nullable = false)
     private Cafe cafe;
 
     public BalanceChange() {

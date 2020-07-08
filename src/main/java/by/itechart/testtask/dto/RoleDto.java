@@ -1,9 +1,7 @@
 package by.itechart.testtask.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 public class RoleDto {
     private Long id;
@@ -29,5 +27,12 @@ public class RoleDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "RoleDto: " +
+                "id = " + id +
+                ", name='" + name + '\'';
     }
 }

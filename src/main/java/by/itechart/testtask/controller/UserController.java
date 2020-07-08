@@ -1,4 +1,4 @@
-package by.itechart.testtask;
+package by.itechart.testtask.controller;
 
 import by.itechart.testtask.dto.UserDto;
 import by.itechart.testtask.service.UserService;
@@ -11,44 +11,40 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class HelloController {
-    private static Logger logger = LoggerFactory.getLogger(HelloController.class);
+@RequestMapping("/users")
+public class UserController {
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
     @Autowired
-    public HelloController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("HelloWorld")
-    public String hello() {
-        return "Hello";
-    }
-
-    @GetMapping("/users")
+    @GetMapping
     public List findAll() {
-        logger.info("invoked method findAll");
+        logger.info("invoked method findAll.");
         return userService.findAll();
     }
 
-    @GetMapping("/users/{id}")
-    public UserDto findUserById(@PathVariable Long id) {
-        logger.info("invoked method findUserById");
-        return userService.findUserById(id);
+    @GetMapping("/{id}")
+    public UserDto findById(@PathVariable Long id) {
+        logger.info("invoked method findUserById.");
+        return userService.findById(id);
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/add")
     public UserDto add(@RequestBody @Valid UserDto userDto) {
         return userService.add(userDto);
     }
 
-    @PutMapping("/users/update")
+    @PutMapping("/update")
     public UserDto update(@RequestBody @Valid UserDto userDto) {
         return userService.update(userDto);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public UserDto deleteById(@PathVariable Long id) {
         return userService.deleteById(id);
     }

@@ -24,7 +24,7 @@ public class TimesheetStatus implements Serializable {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name="timesheet_id", nullable=false)
+    @JoinColumn(name = "timesheet_id", nullable = false)
     private Timesheet timesheet;
 
     @ManyToOne

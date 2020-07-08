@@ -2,7 +2,6 @@ package by.itechart.testtask.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -20,6 +19,10 @@ public class UserDto {
     @NotBlank
     @Size(min = 5, max = 255, message = "password should be equal to or greater than {min} and less than {max}")
     private String password;
+
+    @NotBlank
+    @Size(min = 5, max = 255, message = "password should be equal to or greater than {min} and less than {max}")
+    private String confirmPassword;
 
     @Valid
     private Set<RoleDto> roles;
@@ -60,6 +63,14 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Set<RoleDto> getRoles() {

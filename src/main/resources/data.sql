@@ -21,8 +21,8 @@ INSERT INTO users (full_name, login, password) VALUES
     name VARCHAR(50) NOT NULL
 );*/
 INSERT INTO role (name) VALUES
-    ('MAIN_ADMIN'),
-    ('USER');
+    ('ROLE_ADMIN'),
+    ('ROLE_USER');
 
 -- Table for mapping user and roles: user_role
 -- DROP TABLE IF EXISTS user_role;
