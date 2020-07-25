@@ -31,7 +31,7 @@
             <%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--%>
         </div>
         <div class="modal-body">
-            <form id="login" action="${contextPath}/login" method="post">
+            <form id="login" <%--action="${contextPath}/login" method="post"--%>>
                 <div class="form-group">
                     <span>${error}</span>
                     <div class="input-group">
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-<%--<script>
+<script>
 
     $("#login").submit(function(event) {
         event.preventDefault();
@@ -71,15 +71,16 @@
 
         /*var user = $('input[name=login]').val();
         var password = $('input[name=password]').val();*/
+        var data = 'login=' + $('input[name=login]').val() + '&password=' + $('input[name=password]').val();
 
         $.ajax({
             type: 'POST',
             url: '/login',
-            dataType: 'json',
-            data: JSON.stringify(formJsonObject),
-            contentType: 'application/json; charset=utf-8',
+            /*dataType: 'json',*/
+            data: /*JSON.stringify(formJsonObject)*/data,
+            /*contentType: 'application/json; charset=utf-8',*/
             success: function(data) {
-                //window.location.href = '/welcome';
+                window.location.href = '/welcome';
                 console.log(data)
             },
             error: function(e) {
@@ -88,7 +89,7 @@
         });
     });
 
-</script>--%>
+</script>
 
 <script src="${contextPath}/js/jquery-3.4.1.min.js"></script>
 <script src="${contextPath}/js/bootstrap.min.js"></script>

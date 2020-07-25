@@ -1,18 +1,26 @@
 package by.itechart.testtask.controller;
 
+import by.itechart.testtask.dto.UserDto;
 import by.itechart.testtask.mapper.UserMapper;
 import by.itechart.testtask.repository.UserRepository;
 import by.itechart.testtask.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
 public class MainController {
+
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -45,6 +53,7 @@ public class MainController {
         //return "welcome";
     }
 
+    // login using web form
     @GetMapping("/login")
     public /*ModelAndView*/Model login(Model model, String error, String logout) {
         if (error != null) {
@@ -55,8 +64,16 @@ public class MainController {
         }
         /*ModelAndView modelAndView = new ModelAndView("login");
         return modelAndView;*/
-        return model;/*"/login"*/
+        return model;
     }
+
+    // login using rest
+    /*@GetMapping("/loginRest")
+    public UserDto login(@RequestBody @Valid UserDto userDto) {
+        logger.info("invoked method login.");
+        System.out.println("rest");
+        return userService.findByLogin(userDto.getLogin());
+    }*/
 
     @GetMapping("/registration")
     public ModelAndView /*String*/ registration() {
