@@ -69,19 +69,36 @@
             formJsonObject[v.name] = v.value;
         });
 
-        /*var user = $('input[name=login]').val();
-        var password = $('input[name=password]').val();*/
-        var data = 'login=' + $('input[name=login]').val() + '&password=' + $('input[name=password]').val();
+        var login = $('input[name=login]').val();
+        var password = $('input[name=password]').val();
+        //var data = 'login=' + $('input[name=login]').val() + '&password=' + $('input[name=password]').val();
 
-        $.ajax({
-            type: 'POST',
-            url: '/login',
-            /*dataType: 'json',*/
-            data: /*JSON.stringify(formJsonObject)*/data,
-            /*contentType: 'application/json; charset=utf-8',*/
+        /*$.ajax({
+            url: '/loginBasic',
+            dataType: 'json',
+            username: login,
+            password: password,
             success: function(data) {
                 window.location.href = '/welcome';
-                console.log(data)
+                console.log(data);
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });*/
+
+        $.ajax({
+            type: 'GET',
+            beforeSend: function (request) {
+                request.setRequestHeader ("Authorization", "Basic " + btoa(login + ":" + password));
+            },
+            url: '/loginBasic',
+            dataType: 'json',
+            //data: JSON.stringify(formJsonObject)/*data*/,
+            contentType: 'application/json; charset=utf-8',
+            success: function(/*data*/) {
+                console.log(/*data*/"SUCCESS!")
+                window.location.href = '/welcome';
             },
             error: function(e) {
                 console.log(e);

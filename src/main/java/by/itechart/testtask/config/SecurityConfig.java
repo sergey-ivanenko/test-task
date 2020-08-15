@@ -41,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         /*auth.inMemoryAuthentication()
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                //.passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .withUser("user")
-                .password("123")
+                .password(passwordEncoder().encode("123"))
                 .roles("USER")
         .and().withUser("admin").password("admin").roles("ADMIN");*/
         auth
@@ -61,23 +61,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/js/**", "/fonts/**")
                 .permitAll()
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/registration", "/login").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 /*.antMatchers("/**").hasRole("ADMIN")*/
                 /*.antMatchers("/**").authenticated()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/users").hasAnyRole("USER", "ADMIN")*/
-                .and().formLogin()
-                .loginPage("/login")/*.loginProcessingUrl("/login")*/
+                /*.and().formLogin()
+                .loginPage("/login").defaultSuccessUrl("/welcome", true)*/
+                /*.loginProcessingUrl("/login")
                 .usernameParameter("login").passwordParameter("password")
-                .defaultSuccessUrl("/welcome", true)
-                .failureUrl("/login?error").permitAll()
-                .and()
+                .defaultSuccessUrl("/welcome", true)*/
+                /*.failureUrl("/login?error").permitAll()*/
+                /*.and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
-                .permitAll()
-        .and().csrf().disable();
+                .permitAll()*/
+        .and().httpBasic().and().csrf().disable();
     }
 }

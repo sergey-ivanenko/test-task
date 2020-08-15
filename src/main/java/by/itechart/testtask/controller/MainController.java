@@ -75,6 +75,14 @@ public class MainController {
         return userService.findByLogin(userDto.getLogin());
     }*/
 
+    // login using httpBasic
+    @GetMapping("/loginBasic")
+    public /*UserDto*/String login(/*@RequestBody @Valid UserDto userDto*/Principal principal) {
+        logger.info("invoked method login.");
+        System.out.println("rest");
+        return /*userService.findByLogin(principal.getName());*/"{\"result\": \"ok\"}";
+    }
+
     @GetMapping("/registration")
     public ModelAndView /*String*/ registration() {
         ModelAndView modelAndView = new ModelAndView("registration");
